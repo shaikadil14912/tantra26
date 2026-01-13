@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TANTRA'26 | Economic Fest</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0b1e33, #000);
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      margin-top: 10px;
+      color: #9fd3ff;
+      font-size: 1.1rem;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 40px 25px;
+      text-align: center;
+    }
+
+    .box h2 {
+      color: #00c6ff;
+      margin-bottom: 15px;
+    }
+
+    .countdown {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #9fd3ff;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: #00c6ff;
+    }
+
+    .events {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 18px;
+      padding: 25px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0,198,255,0.2);
+    }
+
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 26px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .btn-register { background: #00c6ff; color: #000; }
+    .btn-whatsapp { background: #25D366; color: #000; }
+    .btn-instagram {
+      background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #aaa;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* MODAL STYLES */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #0b1e33;
+      max-width: 650px;
+      margin: 60px auto;
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .modal-content h2 { color: #00c6ff; }
+    .modal-content h3 { color: #9fd3ff; margin-top: 20px; }
+    .modal-content ul { margin-left: 20px; margin-top: 10px; }
+
+    .close {
+      float: right;
+      font-size: 28px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>TANTRA'26</h1>
+  <p>Department of Economics<br>Central University of Kerala</p>
+</header>
+
+<section>
+  <div class="box">
+    <h2>Countdown to TANTRA'26</h2>
+    <div id="countdown" class="countdown"></div>
+  </div>
+</section>
+
+<section>
+  <div class="box">
+    <h2>Theme</h2>
+    <p><strong>Strategy Spectrum:</strong> Strategizing the Path to Leverage the Asymmetry</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Events</h2>
+  <div class="events">
+    <div class="card"><div class="icon">🎙️</div><h3>Artha Speak</h3><p>Debate & public speaking.</p></div>
+    <div class="card"><div class="icon">📈</div><h3>Dalal Street</h3><p>Stock market simulation.</p></div>
+    <div class="card"><div class="icon">⚔️</div><h3>Battlefield Academia</h3><p>Economics in action.</p></div>
+
+    <!-- ECO QUEST -->
+    <div class="card" onclick="openEcoQuest()">
+      <div class="icon">🧠</div>
+      <h3>Eco Quest</h3>
+      <p>Mind twisting economic challenge.</p>
+    </div>
+
+    <div class="card"><div class="icon">💡</div><h3>ThinkTank Showdown</h3><p>Team strategy contest.</p></div>
+    <div class="card"><div class="icon">🌍</div><h3>Economic Summit</h3><p>Voices shaping the future.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Register & Connect</h2>
+  <div class="links">
+    <div class="card">
+      <h3>Register Now</h3>
+      <a class="btn btn-register" href="https://forms.gle/epEmhPtzLKSXFUaM8" target="_blank">Register</a>
+    </div>
+    <div class="card">
+      <h3>WhatsApp Channel</h3>
+      <a class="btn btn-whatsapp" href="https://whatsapp.com/channel/0029VbBh9EeAe5Vif97Q4u1K" target="_blank">Join</a>
+    </div>
+    <div class="card">
+      <h3>Instagram</h3>
+      <a class="btn btn-instagram" href="https://www.instagram.com/tantra.26" target="_blank">@tantra.26</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 TANTRA | Department of Economics, Central University of Kerala
+</footer>
+
+<!-- ECO QUEST MODAL -->
+<div id="ecoQuestModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeEcoQuest()">&times;</span>
+    <h2>Eco Quest</h2>
+    <p><strong>Team Size:</strong> 2 Members | <strong>Fee:</strong> ₹50</p>
+
+    <h3>Round 1 – The Hunt</h3>
+    <ul>
+      <li>Classroom-based stations</li>
+      <li>Economics puzzles at each station</li>
+      <li>Time-bound completion</li>
+    </ul>
+
+    <h3>Round 2 – Solve the Twist</h3>
+    <ul>
+      <li>Advanced logical & economic problems</li>
+      <li>Hidden twists in clues</li>
+    </ul>
+
+    <h3>Round 3 – End Game</h3>
+    <ul>
+      <li>Final strategic challenge</li>
+      <li>Top teams compete for victory</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  const eventDate = new Date("January 16, 2026 09:00:00").getTime();
+  const countdown = document.getElementById("countdown");
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = eventDate - now;
+    if (diff <= 0) {
+      countdown.innerHTML = "🎉 The Event Has Started!";
+      return;
+    }
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    countdown.innerHTML = `${d} Days ${h} Hours ${m} Minutes ${s} Seconds`;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  function openEcoQuest() {
+    document.getElementById("ecoQuestModal").style.display = "block";
+  }
+  function closeEcoQuest() {
+    document.getElementById("ecoQuestModal").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
