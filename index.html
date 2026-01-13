@@ -12,7 +12,8 @@
 
 body{
 background:radial-gradient(circle at top,#0b1e33,#000);
-color:#fff
+color:#fff;
+line-height:1.6
 }
 
 header{text-align:center;padding:60px 20px}
@@ -46,33 +47,90 @@ box-shadow:0 10px 30px rgba(0,198,255,.3)
 
 .icon{font-size:2.5rem;margin-bottom:10px}
 
-/* MODAL */
+/* ===== MODAL BASE ===== */
 .modal{
 display:none;
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.9);
 z-index:9999;
-padding:20px
+padding:20px;
+overflow:auto
+}
+
+.modal.show{
+display:block;
+animation:fadeBg .4s ease forwards
+}
+
+@keyframes fadeBg{
+from{background:rgba(0,0,0,0)}
+to{background:rgba(0,0,0,.9)}
 }
 
 .modal-content{
 background:#0b1e33;
-max-width:650px;
+max-width:700px;
 margin:60px auto;
 padding:30px;
 border-radius:20px;
 border:1px solid rgba(255,255,255,.2)
 }
 
-.modal h2{color:#00c6ff}
-.modal h3{color:#9fd3ff;margin-top:20px}
-.modal ul{margin-left:20px;margin-top:10px}
-
 .close{
 float:right;
 font-size:28px;
 cursor:pointer
+}
+
+.modal h2{color:#00c6ff}
+.modal h3{color:#9fd3ff;margin-top:20px}
+.modal ul{margin-left:20px;margin-top:10px}
+
+/* ===== DALAL STREET ANIMATION ===== */
+.animate-dalal{
+animation:slideUp .6s ease forwards
+}
+
+@keyframes slideUp{
+from{
+transform:translateY(40px) scale(.95);
+opacity:0
+}
+to{
+transform:translateY(0) scale(1);
+opacity:1
+}
+}
+
+.dalal-title{
+animation:pulseGlow 2s infinite alternate
+}
+
+@keyframes pulseGlow{
+from{text-shadow:0 0 6px rgba(0,198,255,.4)}
+to{text-shadow:0 0 20px rgba(0,198,255,1)}
+}
+
+.btn{
+display:inline-block;
+margin-top:15px;
+padding:12px 24px;
+border-radius:30px;
+font-weight:600;
+text-decoration:none
+}
+
+.btn-whatsapp{
+background:#25D366;
+color:#000
+}
+
+footer{
+text-align:center;
+padding:30px;
+color:#aaa;
+border-top:1px solid rgba(255,255,255,.1)
 }
 </style>
 </head>
@@ -95,10 +153,10 @@ cursor:pointer
 <p>Debate & public speaking</p>
 </div>
 
-<div class="card">
+<div class="card" id="dalalStreetBtn">
 <div class="icon">📈</div>
 <h3>Dalal Street</h3>
-<p>Stock market simulation</p>
+<p>Intra-day trading challenge</p>
 </div>
 
 <div class="card">
@@ -107,7 +165,6 @@ cursor:pointer
 <p>Economics in action</p>
 </div>
 
-<!-- ECO QUEST -->
 <div class="card" id="ecoQuestBtn">
 <div class="icon">🧠</div>
 <h3>Eco Quest</h3>
@@ -129,13 +186,17 @@ cursor:pointer
 </div>
 </section>
 
-<!-- ECO QUEST MODAL -->
+<footer>
+© 2026 TANTRA | Department of Economics, Central University of Kerala
+</footer>
+
+<!-- ===== ECO QUEST MODAL ===== -->
 <div class="modal" id="ecoQuestModal">
 <div class="modal-content">
 <span class="close" id="closeEcoQuest">&times;</span>
 
 <h2>Eco Quest</h2>
-<p><strong>Team Size:</strong> 2 Members | <strong>Fee:</strong> ₹50</p>
+<p><strong>Team Size:</strong> 2 Members</p>
 
 <h3>Round 1 – The Hunt</h3>
 <ul>
@@ -155,6 +216,49 @@ cursor:pointer
 <li>Final strategic showdown</li>
 <li>Top teams compete for victory</li>
 </ul>
+</div>
+</div>
+
+<!-- ===== DALAL STREET MODAL (ANIMATED) ===== -->
+<div class="modal" id="dalalStreetModal">
+<div class="modal-content animate-dalal">
+<span class="close" id="closeDalalStreet">&times;</span>
+
+<h2 class="dalal-title">Dalal Street</h2>
+<p><strong>The Market Never Sleeps. Neither Should You!</strong></p>
+
+<p><strong>Event Type:</strong> Individual Event</p>
+<p><strong>Time:</strong> 11:30 AM – 12:30 PM</p>
+<p><strong>Stock Exchange:</strong> NSE</p>
+
+<h3>Event Guidelines</h3>
+<ul>
+<li>Open to UG & PG students of all disciplines</li>
+<li>Game based on real-time stock market data</li>
+<li>Intra-day trading only</li>
+<li>Equity shares only</li>
+<li>F&O and large caps NOT allowed</li>
+<li>Entire fund must be invested</li>
+<li>Ranking based on profit</li>
+<li>Tie-breaker: Earlier trade completion</li>
+</ul>
+
+<h3>Important Instructions</h3>
+<ul>
+<li>Game rules explained before start</li>
+<li>Paper & pen method will be used</li>
+<li>Laptop/tablet allowed if available</li>
+<li>Learn intraday basics beforehand</li>
+<li>Any platform may be used to track prices</li>
+</ul>
+
+<h3>WhatsApp Group (Registered Participants)</h3>
+<a class="btn btn-whatsapp"
+href="https://chat.whatsapp.com/IsE6D4b3KJX2HGa020tGaJ"
+target="_blank">Join WhatsApp Group</a>
+
+<h3>Event Coordinators</h3>
+<p><strong>SHAIK ADIL</strong><br><strong>KEVIN JACOB</strong></p>
 
 </div>
 </div>
@@ -164,14 +268,20 @@ const ecoBtn=document.getElementById("ecoQuestBtn");
 const ecoModal=document.getElementById("ecoQuestModal");
 const ecoClose=document.getElementById("closeEcoQuest");
 
-ecoBtn.addEventListener("click",()=>ecoModal.style.display="block");
-ecoClose.addEventListener("click",()=>ecoModal.style.display="none");
+const dalalBtn=document.getElementById("dalalStreetBtn");
+const dalalModal=document.getElementById("dalalStreetModal");
+const dalalClose=document.getElementById("closeDalalStreet");
 
-window.addEventListener("click",(e)=>{
-if(e.target===ecoModal){
-ecoModal.style.display="none";
+ecoBtn.onclick=()=>ecoModal.classList.add("show");
+ecoClose.onclick=()=>ecoModal.classList.remove("show");
+
+dalalBtn.onclick=()=>dalalModal.classList.add("show");
+dalalClose.onclick=()=>dalalModal.classList.remove("show");
+
+window.onclick=e=>{
+if(e.target===ecoModal)ecoModal.classList.remove("show");
+if(e.target===dalalModal)dalalModal.classList.remove("show");
 }
-});
 </script>
 
 </body>
